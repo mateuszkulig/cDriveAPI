@@ -8,7 +8,7 @@ tokenUrl = "https://oauth2.googleapis.com/token"
 # SCOPES = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.scripts"
 SCOPES = "https://www.googleapis.com/auth/drive.file"
 
-fileContent = "kocham pcimcie!"
+# fileContent = "kocham pcimcie!"
 
 with open("secret_token.json", "r") as file:
     jsonStr = file.read()
@@ -54,6 +54,14 @@ oAuthTokenRequestParams["code"] = code
 req = post(tokenUrl, params=oAuthTokenRequestParams)
 accessTokenData = loads(req.text)
 accessToken = accessTokenData["access_token"]
+refreshToken = accessTokenData["refresh_token"]
 fileRequestParams["access_token"] = accessToken
 
-post(fileUrl, params=fileRequestParams, headers=headers, data=fileContent)
+# save the token to file
+with open("access_token.txt", "w+") as file:
+    file.write(accessToken)
+
+with open("refresh_token.txt", "w+") as file:
+    file.write(refreshToken)
+
+# post(fileUrl, params=fileRequestParams, headers=headers, data=fileContent)

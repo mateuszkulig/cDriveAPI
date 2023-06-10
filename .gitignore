@@ -1,6 +1,11 @@
 # python modules cache
 __pycache__
 
+# sensitive oauth stuff
+access_token.txt
+refresh_token.txt
+secret_token.json
+
 # Prerequisites
 *.d
 
